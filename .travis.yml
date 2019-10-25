@@ -4,7 +4,6 @@ matrix:
   - python:
     - '3.5'
     - '3.6'
-    - '3.7'
     dist: xenial
     sudo: true
   fast_finish: true
@@ -12,7 +11,6 @@ services:
 - postgresql
 env:
 - TOX_ENV=py27-django-111
-- TOX_ENV=py37-django-22
 - TOX_ENV=py36-django-22
 - TOX_ENV=py35-django-22
 install: pip install -r requirements-test.txt
