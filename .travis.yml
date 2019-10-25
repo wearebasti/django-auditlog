@@ -1,49 +1,34 @@
-# Config file for automatic testing at travis-ci.org
-
-dist: trusty
-sudo: required
 language: python
-python: 3.6
-group: deprecated-2017Q3
-services:
-  - postgresql
-
-addons:
-  postgresql: "9.4"
-
-env:
-  - TOX_ENV=py36-django-18
-  - TOX_ENV=py35-django-18
-  - TOX_ENV=py34-django-18
-  - TOX_ENV=py27-django-18
-  - TOX_ENV=py36-django-110
-  - TOX_ENV=py35-django-110
-  - TOX_ENV=py34-django-110
-  - TOX_ENV=py27-django-110
-  - TOX_ENV=py36-django-111
-  - TOX_ENV=py35-django-111
-  - TOX_ENV=py34-django-111
-  - TOX_ENV=py27-django-111
-  - TOX_ENV=py36-django-20
-  - TOX_ENV=py35-django-20
-  - TOX_ENV=py34-django-20
-
+python:
+- '3.5'
+- '3.6'
 matrix:
+  include:
+  - python: '3.7'
+    dist: xenial
+    sudo: true
   fast_finish: true
-
+services:
+- postgresql
+env:
+- TOX_ENV=py36-django-111
+- TOX_ENV=py35-django-111
+- TOX_ENV=py27-django-111
+- TOX_ENV=py36-django-22
+- TOX_ENV=py35-django-22
 install: pip install -r requirements-test.txt
-
 script: tox -e $TOX_ENV
-
 after_success:
-  - codecov -e TOX_ENV
-
+- codecov -e TOX_ENV
 deploy:
   provider: pypi
-  user: $PYPI_USER
+  skip_existing: true
+  skip_cleanup: true
+  user: __token__
   password:
-    secure: $PYPI_PASSWORD
+    secure: Sv+y5CV9KayVVH7IAnusTRusnvuokIQ5LIBV434wWRJNznwyChihMUAQGrsBv67p/e7GvACKEmt8wzwR0Chtf3dJx1M8kPBXdbJtMVNrgx9MniRsiT/kKmFAaRQWdATXM5u7d2GqLeSPtcOVFJSvcGsjDgf2Y/Yx2vlIuF13ZfTRXvgvYRTithol0cj7wO0PM4VGVFH8/oqrPitdSfBy+l08luefIlpCY1QORsKeRgdHH5f4ITgcw2KHd43aAQlDgjjAkmCuRjIiSLcpDO6Z7TeJz16DkamvvjFE1+sZs1YH9syqnGEWjPWHbCdNovWMU8di40idhwMyhYSmV9gnA+h09mjp8EmyAlkSLgk7JxkTpQWi4gUAM+tLDgrnWxIR2ow6LrdhyH8DXGatRGg+g7jHDM9UyzMfev7Pxfdcoz2o6rurYGaT0JhwXCoskTBBEWxBWmHEV/6gO63KDZ0f/MGZmcV83FxW2bPWLw3JkoFU9iQklsfHYA6WhQj0XbLYvm/J2r3lc6+Niltd9mvkfePTJWlHassGu00kf4JSExAGxbOZ5a6rkrBGxtf30VYZ0AKV0zaUHfnQWU7VuEMGmzLpt0DIoHHeC6JhE/odacMaienm79v3c8jpQ5m/pDMwrN/LPtfn9OX46IeGKbsY2QQuJ3f7f7p+10/qDKB5Sxw=
   on:
-    repo: jjkester/django-auditlog
-    branch: stable
-    condition: $TOX_ENV = py36-django-20
+    repo: Canned-Django/django-auditlog
+    branch: master
+    tags: true
+    condition: "$TOX_ENV = py36-django-22"
