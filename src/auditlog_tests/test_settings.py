@@ -44,9 +44,9 @@ DATABASES = {
     },
     'postgres': {
         'ENGINE': POSTGRES_DRIVER,
-        'NAME': 'auditlog_tests_db',
-        'USER': 'postgres',
-        'PASSWORD': '',
+        'NAME': 'auditlog',
+        'USER': 'auditlog',
+        'PASSWORD': 'auditlog',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

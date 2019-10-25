@@ -11,9 +11,8 @@ matrix:
 services:
 - postgresql
 env:
-- TOX_ENV=py36-django-111
-- TOX_ENV=py35-django-111
 - TOX_ENV=py27-django-111
+- TOX_ENV=py37-django-22
 - TOX_ENV=py36-django-22
 - TOX_ENV=py35-django-22
 install: pip install -r requirements-test.txt
