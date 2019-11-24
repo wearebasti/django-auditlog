@@ -3,11 +3,6 @@ python:
   - '3.5'
   - '3.6'
   - '3.7'
-matrix:
-  include:
-    dist: xenial
-    sudo: true
-  fast_finish: true
 services:
 - postgresql
 install: pip install tox-travis
